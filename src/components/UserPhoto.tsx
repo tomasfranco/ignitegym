@@ -14,5 +14,5 @@ export function UserPhoto({size, ...rest}: Props) {
     borderColor="gray.400"
     {...rest}
     />
-  )
+  );
 }
