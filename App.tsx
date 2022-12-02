@@ -4,6 +4,8 @@ import { useFonts, Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/
 
 import { THEME } from "./src/theme";
 
+import { AuthContextProvider } from "@contexts/AuthContext";
+
 import { Loading } from "@components/Loading";
 import { SignUp } from "@screens/SignUp";
 import { Routes } from "./src/routes";
@@ -19,8 +21,10 @@ export default function App(){
         barStyle='light-content'
         backgroundColor='transparent'
         translucent
-      />      
-    {fontsLoaded ? <Routes /> : <Loading />}
+      /> 
+      <AuthContextProvider>
+        {fontsLoaded ? <Routes /> : <Loading />}
+      </AuthContextProvider>
     </NativeBaseProvider>
   )
 }
