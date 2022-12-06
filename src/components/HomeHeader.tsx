@@ -2,15 +2,21 @@ import { TouchableOpacity } from "react-native";
 import { Pressable, IPressableProps, Heading, HStack, Text, VStack, Icon } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons"
 
+import { useAuth } from "@hooks/useAuth";
+
+import defaultUserPhotoImg from "@assets/userPhotoDefault.png";
+
 import { UserPhoto } from "./UserPhoto";
 
 export function HomeHeader(){
+  const { user, signOut } = useAuth();
+
   return (
     
     <HStack bg="gray.600" pt={16} pb={5} px={8} alignItems="center">
       <TouchableOpacity>
       <UserPhoto 
-        source={{ uri: 'https://github.com/tomasfranco.png'}}
+        source={user.avatar ? {uri: user.avatar}: defaultUserPhotoImg }
         alt="Image do Usuário"
         size={16}
         mr={4}        
@@ -22,11 +28,11 @@ export function HomeHeader(){
       </Text>
      
       <Heading color="gray.100" fontSize="md" fontFamily="heading">
-        Tomás Franco
+        {user.name}
       </Heading>
     </VStack>
 
-    <TouchableOpacity>
+    <TouchableOpacity onPress={signOut}>
     <Icon
         as={MaterialIcons}
         name="logout"
