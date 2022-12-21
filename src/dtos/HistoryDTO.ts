@@ -3,5 +3,5 @@ export type HistoryDTO = {
   name: string;
   group: string;
   hour: string;
-  create_at: string;
+  created_at: string;
 }
