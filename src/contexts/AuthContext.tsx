@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useEffect, useInsertionEffect, useState } from "react";
 
 import { storageAuthTokenSave, storageAuthTokenGet, storageAuthTokenRemove } from "@storage/storageAuthToken";
 import { storageUserSave, storageUserGet, storageUserRemove } from "@storage/storageUser";
@@ -104,6 +104,14 @@ async function updateUserProfile(userUpdated: UserDTO) {
   useEffect(() => {
     loadUserData();
   }, []);
+
+useEffect(() => {
+  const subscribe = api.registerInterceptTokenManager(signOut);
+
+  return () => {
+    subscribe();
+  }
+}, [signOut]);
 
   return (
     <AuthContext.Provider value={{ user, signIn, signOut, isLoadingUserStorageData, updateUserProfile }}>
